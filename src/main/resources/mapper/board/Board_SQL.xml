@@ -1,5 +1,35 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="kr.or.ibuk5do.imsi.board.service.impl.BoardMapper">
+    <insert id="addBoard" parameterType="kr.or.ibuk5do.imsi.board.vo.BoardVO" useGeneratedKeys="true" keyColumn="BOARD_SN" keyProperty="boardSn">
+        INSERT INTO TB_BOARD (
+           BOARD_TITLE,
+           BOARD_CONTENT,
+           USER_SN,
+           USE_AT,
+           REGIST_DT
+        ) VALUES (
+           #{boardTitle},
+           #{boardContent},
+           #{userSn},
+           'y',
+           now()
+        )
+    </insert>
 
+    <select id="getBoard" parameterType="kr.or.ibuk5do.imsi.board.vo.BoardVO" resultType="kr.or.ibuk5do.imsi.board.vo.BoardVO">
+        SELECT      BOARD_SN,
+                    BOARD_TITLE,
+                    BOARD_CONTENT,
+                    USER_ID,
+                    REGIST_DT,
+                    UPDT_ID
+                    UPDT_DT,
+        FROM        TB_BOARD
+        <if test="boardSn != null and boardSn != ''">
+        WHERE
+        AND         BOARD_SN = #{boardSn}
+        </if>
+        ORDER BY    REGIST_DT DESC;
+    </select>
 </mapper>

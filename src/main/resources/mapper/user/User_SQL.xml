@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="kr.or.ibuk5do.imsi.user.service.impl.UserMapper">
+    <insert id="addUser" parameterType="kr.or.ibuk5do.imsi.user.vo.UserVO">
+        INSERT INTO TB_USER (
+            USER_ID,
+            USER_PASSWORD,
+            USE_AT,
+            REGIST_DT
+        ) VALUES (
+            #{userId},
+            #{userPassword},
+            'y',
+            now()
+        )
+    </insert>
+    <!-- 조건에 맞는 설정으로 변경해야함 ex) <if test="" choose when 사용하여 조건을 걸어야함 -->
+    <select id="getUser" parameterType="kr.or.ibuk5do.imsi.user.vo.UserVO" resultType="kr.or.ibuk5do.imsi.user.vo.UserVO">
+        SELECT  USER_SN,
+                USER_ID,
+                USER_PASSWORD,
+                USE_AT,
+                REGIST_DT,
+                UPDT_DT
+        FROM    TB_USER,
+        WHERE   USER_ID = #{userId}
+    </select>
+</mapper>

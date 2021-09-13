@@ -1,18 +1,28 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: HIY
-  Date: 2021-09-10
-  Time: 오후 3:42
-  To change this template use File | Settings | File Templates.
---%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<html>
-<head>
-    <title>Title</title>
-</head>
-<body>
-<form action="" enctype="multipart/form-data" method="post">
+<script type="text/javascript" src="/assets/js/board/board.js"></script>
 
-</form>
-</body>
-</html>
+<div class="content">
+    <form action="/board/add" enctype="multipart/form-data" method="post">
+        <table id="dataBoard" border="">
+            <tr>
+                <td>제목</td>
+                <td><input type="text" name="boardTitle" placeholder="tilte"></td>
+            </tr>
+            <tr id="fileUpload">
+                <td rowspan="1">파일첨부</td>
+                <td><input type="file" name="uploadFile" placeholder="tilte"></td>
+            </tr>
+            <tr>
+                <td><button type="button" id="addFile">파일 추가</button></td>
+            </tr>
+            <tr>
+                <td>내용</td>
+                <td><textarea name="boardContent"></textarea></td>
+            </tr>
+            <tr>
+                <td>전송</td>
+                <td><input type="submit" value="전송"></td>
+            </tr>
+        </table>
+    </form>
+</div>

@@ -10,7 +10,7 @@ import java.util.Date;
 public class DefaultVO {
     private String useAt;
 
-    private String registId;
+    private String userId;
     private String updtId;
     private Date registDt;
     private Date updtDt;

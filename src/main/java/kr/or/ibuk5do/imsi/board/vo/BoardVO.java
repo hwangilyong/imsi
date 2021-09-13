@@ -12,7 +12,7 @@ public class BoardVO extends DefaultVO {
     public long boardSn;
 
     public String boardTitle;
-    public String boardContnet;
+    public String boardContent;
     public String boardClCode;
     public String boardClCn;
 }

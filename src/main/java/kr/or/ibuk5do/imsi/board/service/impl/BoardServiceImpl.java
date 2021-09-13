@@ -13,8 +13,8 @@ public class BoardServiceImpl implements BoardService {
     private BoardMapper boardMapper;
 
     @Override
-    public void addBoard(BoardVO boardVO) throws Exception {
-        boardMapper.addBoard(boardVO);
+    public String addBoard(BoardVO boardVO) throws Exception {
+        return boardMapper.addBoard(boardVO);
     }
 
     @Override

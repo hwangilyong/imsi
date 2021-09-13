@@ -6,17 +6,11 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<html>
-<head>
-    <title>Title</title>
-</head>
-<body>
+
 <div class="container">
-    <form action="/user/join" method="post">
-        <input type="text" name="userId">
-        <input type="password" name="userPassword">
+    <form action="/join" method="post">
+        <input type="text" name="userId" placeholder="id">
+        <input type="password" name="userPassword" placeholder="password">
         <button type="submit">JOIN</button>
     </form>
 </div>
-</body>
-</html>

@@ -11,6 +11,7 @@ import java.util.Date;
 @Setter
 @Alias("UserVO")
 public class UserVO{
+    private long userSn;
     private String userId;
     private String userPassword;
     private String userDeptCode;

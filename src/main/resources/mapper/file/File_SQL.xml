@@ -1,5 +1,30 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="kr.or.ibuk5do.imsi.board.service.impl.BoardMapper">
+<mapper namespace="kr.or.ibuk5do.imsi.util.file.service.impl.FileMapper">
+    <insert id="addFile" parameterType="kr.or.ibuk5do.imsi.util.file.vo.FileVO">
+        INSERT INTO TB_FILE (
+            FILE_NM,
+            FILE_ORGL_NM,
+            BOARD_SN,
+            USE_AT,
+            USER_SN,
+            REGIST_DT
+        ) VALUES (
+             #{fileNm},
+             #{fileOrglNm},
+             #{boardSn}
+             'y',
+             #{userSn},
+             now()
+        )
+    </insert>
 
+    <select id="getFile" parameterType="kr.or.ibuk5do.imsi.util.file.vo.FileVO">
+        SELECT  FILE_SN,
+                FILE_NM,
+                FILE_ORGL_NM,
+                FILE_SIZE,
+                BOARD_SN
+        WHERE   BOARD_SN = #{boardSn}
+    </select>
 </mapper>
