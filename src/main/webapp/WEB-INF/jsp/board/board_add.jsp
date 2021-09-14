@@ -2,7 +2,9 @@
 <script type="text/javascript" src="/assets/js/board/board.js"></script>
 
 <div class="content">
+
     <form action="/board/add" enctype="multipart/form-data" method="post">
+        <input id="uploadFile" multiple="multiple" type="file" name="uploadFile[]" placeholder="tilte" style="display: none">
         <table id="dataBoard" border="">
             <tr>
                 <td>제목</td>
@@ -10,8 +12,8 @@
             </tr>
             <tr id="fileUpload">
                 <td rowspan="1">파일첨부</td>
-                <td><input type="file" name="uploadFile" placeholder="tilte"></td>
-                <td><button type="button" class="rmFile">취소</button></td>
+                <td><button id="addFile" type="button">+</button></td>
+                <td><div class="fileList"></div></td>
             </tr>
             <tr>
                 <td>내용</td>

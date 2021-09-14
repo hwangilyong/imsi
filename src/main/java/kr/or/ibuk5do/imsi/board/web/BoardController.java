@@ -43,10 +43,17 @@ public class BoardController {
     }
 
     @PostMapping("/add")
-    public String boardAdd(HttpSession session, BoardVO boardVO, MultipartFile[] uploadFile) throws Exception {
+    public String boardAdd(Model model, HttpSession session, BoardVO boardVO, MultipartFile[] uploadFile) throws Exception {
+        if (uploadFile.length > 0) {
+            for (MultipartFile file: uploadFile) {
+                logger.info("test : {}", file.getOriginalFilename());
+            }
+            return "redirect:/";
+        }
         UserVO userAuth = (UserVO)session.getAttribute("userAuth");
         if (userAuth == null) {
-            return "redirect:/login";
+            model.addAttribute("message", "not auth");
+            return "/user/login.tile";
         }
         boardVO.setUserSn(userAuth.getUserSn());
         long boardSn = boardService.addBoard(boardVO);
