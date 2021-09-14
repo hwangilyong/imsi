@@ -11,9 +11,7 @@
             <tr id="fileUpload">
                 <td rowspan="1">파일첨부</td>
                 <td><input type="file" name="uploadFile" placeholder="tilte"></td>
-            </tr>
-            <tr>
-                <td><button type="button" id="addFile">파일 추가</button></td>
+                <td><button type="button" class="rmFile">취소</button></td>
             </tr>
             <tr>
                 <td>내용</td>

@@ -3,6 +3,7 @@ package kr.or.ibuk5do.imsi.web;
 import kr.or.ibuk5do.imsi.user.service.UserService;
 import kr.or.ibuk5do.imsi.user.vo.UserVO;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 
@@ -36,10 +37,11 @@ public class HomeController {
     }
 
     @PostMapping("/login")
-    public String login(HttpSession session, UserVO userVO) throws Exception {
-        UserVO userAuth = userService.getUser(userVO);
+    public String login(Model model, HttpSession session, UserVO userVO) throws Exception {
+        UserVO userAuth = userService.login(userVO);
         if (userAuth == null) {
-            return "forward:/login";
+            model.addAttribute("message", "null");
+            return "/user/login.tile";
         }
         session.setAttribute("userAuth", userAuth);
         session.setMaxInactiveInterval(500);

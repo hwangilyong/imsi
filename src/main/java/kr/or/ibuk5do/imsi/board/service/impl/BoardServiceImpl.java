@@ -13,7 +13,7 @@ public class BoardServiceImpl implements BoardService {
     private BoardMapper boardMapper;
 
     @Override
-    public String addBoard(BoardVO boardVO) throws Exception {
+    public long addBoard(BoardVO boardVO) throws Exception {
         return boardMapper.addBoard(boardVO);
     }
 

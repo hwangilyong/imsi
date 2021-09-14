@@ -45,16 +45,21 @@ public class BoardController {
     @PostMapping("/add")
     public String boardAdd(HttpSession session, BoardVO boardVO, MultipartFile[] uploadFile) throws Exception {
         UserVO userAuth = (UserVO)session.getAttribute("userAuth");
-        boardVO.setUserId(userAuth.getUserId());
-        String boardSn = boardService.addBoard(boardVO);
+        if (userAuth == null) {
+            return "redirect:/login";
+        }
+        boardVO.setUserSn(userAuth.getUserSn());
+        long boardSn = boardService.addBoard(boardVO);
 
         for (MultipartFile file : uploadFile) {
-            FileVO fileVO = new FileVO();
-            fileVO.setBoardSn(Long.parseLong(boardSn));
-            fileVO.setFileOrglNm(file.getOriginalFilename());
-            fileVO.setFileNm(fileService.generateFileUploader(file));
+            if (file != null) {
+                FileVO fileVO = new FileVO();
+                fileVO.setBoardSn(boardSn);
+                fileVO.setFileOrglNm(file.getOriginalFilename());
+                fileVO.setFileNm(fileService.generateFileUploader(file));
 
-            fileService.addFile(fileVO);
+                fileService.addFile(fileVO);
+            }
         }
 
         return "redirect:/board/list";

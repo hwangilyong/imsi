@@ -14,7 +14,7 @@
            #{userSn},
            'y',
            now()
-        )
+        ) RETURNING BOARD_SN;
     </insert>
 
     <select id="getBoard" parameterType="kr.or.ibuk5do.imsi.board.vo.BoardVO" resultType="kr.or.ibuk5do.imsi.board.vo.BoardVO">

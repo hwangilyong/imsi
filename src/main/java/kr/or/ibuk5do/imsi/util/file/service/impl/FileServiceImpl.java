@@ -6,9 +6,11 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.annotation.Resource;
+import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.File;
+import java.net.URLEncoder;
 import java.nio.file.Path;
 import java.util.List;
 
@@ -45,6 +47,60 @@ public class FileServiceImpl implements FileService {
 
     @Override
     public void generateFileDownloader(HttpServletRequest request, HttpServletResponse response) {
+        /*response.reset();
+        //response.setContentType("application/x-msdownload; charset=UTF-8");
+        response.setHeader("Content-Type", "application/octet-stream; charset=UTF-8");
+        if (downloadSize > 0L && downloadSize < Long.MAX_VALUE) {
+            //response.setContentLength((int)downloadSize);
+            response.setHeader("Content-Length", String.valueOf(downloadSize));
+        }
+        response.setHeader("Accept-Ranges", "bytes");
 
+        // 웹브라우저 및 WAS유형에 따라 컨텐츠명 인코딩을 다르게 처리
+        if (ViewUtils.getClientAgent(request) == ClientAgent.MSIE) {
+            response.setHeader("Content-Type", "application/x-msdownload; charset=UTF-8");
+            // MSIE일 경우 처리
+            downloadName = URLEncoder.encode(downloadName, "UTF-8").replaceAll("\\+", "%20");
+        } else {
+            // Firefox, chrome등 비MSIE 처리
+            if (DeployTargetWas.JBOSS.equals(ViewUtils.deployTargetWas)) {
+                downloadName = new String(downloadName.getBytes("UTF-8"), "UTF-8");
+            } else if (DeployTargetWas.TOMCAT.equals(ViewUtils.deployTargetWas)) {
+                downloadName = new String(downloadName.getBytes("UTF-8"), "iso-8859-1");
+            } else {
+                downloadName = new String(downloadName.getBytes("UTF-8"), "iso-8859-1");
+            }
+        }
+
+        response.setHeader("Content-Disposition", "attachment;filename=\"" + downloadName + "\";");
+        response.setHeader("Content-Transfer-Encoding", "binary");
+        response.setHeader("Cache-Control", "no-store,max-age=0,must-revalidate");
+        response.setHeader("Pragma", "no-cache");
+        response.setHeader("Expires", "-1");
+
+        ServletOutputStream out = response.getOutputStream();
+        workbook.write(out);
+        out.flush();
+        out.close();*/
     }
+
+//    public static ClientAgent getClientAgent(HttpServletRequest request) {
+//        String userAgent = request.getHeader("User-Agent");
+//        ClientAgent ret = null;
+//
+//        if (userAgent.indexOf("MSIE") > -1) {
+//            // MSIE일 경우 처리
+//            ret = ClientAgent.MSIE;
+//        } else if (userAgent.indexOf("Firefox") > -1) {
+//            // Firefox
+//            ret = ClientAgent.Firefox;
+//        } else if (userAgent.indexOf("Chrome") > -1) {
+//            // Chrome
+//            ret = ClientAgent.Chrome;
+//        } else {
+//            ret = ClientAgent.MSIE;
+//        }
+//
+//        return ret;
+//    }
 }

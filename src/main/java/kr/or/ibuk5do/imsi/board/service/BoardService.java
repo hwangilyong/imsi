@@ -5,7 +5,7 @@ import kr.or.ibuk5do.imsi.board.vo.BoardVO;
 import java.util.List;
 
 public interface BoardService {
-    public String addBoard(BoardVO boardVO) throws Exception;
+    public long addBoard(BoardVO boardVO) throws Exception;
     public BoardVO getBoard(BoardVO boardVO) throws Exception;
     public List<BoardVO> getBoardList(BoardVO boardVO) throws Exception;
 }

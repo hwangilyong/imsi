@@ -10,6 +10,16 @@ import javax.annotation.Resource;
 public class UserServiceImpl implements UserService {
     @Resource(name = "userMapper")
     private UserMapper userMapper;
+
+    @Override
+    public UserVO login(UserVO userVO) throws Exception {
+        UserVO userInfo = getUser(userVO);
+        if (userInfo == null || !userInfo.getUserPassword().equals(userVO.getUserPassword())) {
+            return null;
+        }
+        return userInfo;
+    }
+
     @Override
     public void addUser(UserVO userVO) throws Exception {
         userMapper.addUser(userVO);

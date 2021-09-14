@@ -22,7 +22,7 @@
                 USE_AT,
                 REGIST_DT,
                 UPDT_DT
-        FROM    TB_USER,
+        FROM    TB_USER
         WHERE   USER_ID = #{userId}
     </select>
 </mapper>

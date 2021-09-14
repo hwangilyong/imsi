@@ -9,7 +9,7 @@ import java.util.List;
 @Mapper
 @Repository("boardMapper")
 public interface BoardMapper {
-    public String addBoard(BoardVO boardVO) throws Exception;
+    public long addBoard(BoardVO boardVO) throws Exception;
     public BoardVO getBoard(BoardVO boardVO) throws Exception;
     public List<BoardVO> getBoardList(BoardVO boardVO) throws Exception;
 }
