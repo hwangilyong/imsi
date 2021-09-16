@@ -1,5 +1,11 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-
+<script>
+$(document).ready(() => {
+    $('#btnBoardAdd').click(() => {
+        location.href= '/board/add';
+    })
+})
+</script>
 <div class="content">
     <table>
         <thead>
@@ -19,4 +25,5 @@
         </c:if>
         </tbody>
     </table>
+    <button id="btnBoardAdd" type="button">add</button>
 </div>

@@ -10,5 +10,6 @@ import java.util.List;
 @Repository("fileMapper")
 public interface FileMapper {
     public void addFile(FileVO fileVO) throws Exception;
-    public List<FileVO> getFile(FileVO fileVO) throws Exception;
+    public List<FileVO> getFileList(FileVO fileVO) throws Exception;
+    public FileVO getFile(FileVO fileVO) throws Exception;
 }

@@ -13,7 +13,10 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import java.util.List;
 
 @Controller
 @RequestMapping("/board")
@@ -28,7 +31,7 @@ public class BoardController {
 
     @GetMapping("/list")
     public String boardList(Model model) throws Exception {
-    model.addAttribute("boardVOList", boardService.getBoardList(new BoardVO()));
+        model.addAttribute("boardVOList", boardService.getBoardList(new BoardVO()));
         return "/board/board_list.tile";
     }
 
@@ -40,7 +43,7 @@ public class BoardController {
     @ResponseBody
     @PostMapping("/add")
     public boolean boardAdd(HttpSession session, BoardVO boardVO, MultipartFile[] files) throws Exception {
-        UserVO userAuth = (UserVO)session.getAttribute("userAuth");
+        UserVO userAuth = (UserVO) session.getAttribute("userAuth");
         if (userAuth == null) {
             return false;
         }
@@ -49,14 +52,12 @@ public class BoardController {
 
         if (files != null) {
             for (MultipartFile file : files) {
-                if (file != null) {
-                    FileVO fileVO = new FileVO();
-                    fileVO.setBoardSn(boardSn);
-                    fileVO.setFileOrglNm(file.getOriginalFilename());
-                    fileVO.setFileNm(fileService.generateFileUploader(file));
+                FileVO fileVO = new FileVO();
+                fileVO.setBoardSn(boardSn);
+                fileVO.setFileOrglNm(file.getOriginalFilename());
+                fileVO.setFileNm(fileService.generateFileUploader(file));
 
-                    fileService.addFile(fileVO);
-                }
+                fileService.addFile(fileVO);
             }
         }
 
@@ -64,8 +65,26 @@ public class BoardController {
     }
 
     @GetMapping("/de/{boardSn}")
-    public String boardDe(@PathVariable("boardSn")String boardSn, Model model) throws Exception {
+    public String boardDe(@PathVariable("boardSn") long boardSn, Model model) throws Exception {
+        FileVO fileVO = new FileVO();
+        BoardVO boardVO = new BoardVO();
+
+        fileVO.setBoardSn(boardSn);
+        List<FileVO> fileVOList = fileService.getFileList(fileVO);
+        boardVO = boardService.getBoard(boardVO);
+
+        model.addAttribute("boardVO", boardVO);
+        model.addAttribute("fileVOList", fileVOList);
 
         return "";
+    }
+
+    @PostMapping("/de/file")
+    public void fileDownload(@RequestParam long fileSn, HttpServletRequest request, HttpServletResponse response) throws Exception {
+        FileVO fileVO= new FileVO();
+        fileVO.setFileSn(fileSn);
+
+        fileVO = fileService.getFile(fileVO);
+        fileService.generateFileDownloader(request, response, fileVO.getFileNm());
     }
 }

@@ -9,7 +9,8 @@ import java.util.List;
 
 public interface FileService {
     public void addFile(FileVO fileVO) throws Exception;
-    public List<FileVO> getFile(FileVO fileVO) throws Exception;
+    public List<FileVO> getFileList(FileVO fileVO) throws Exception;
+    public FileVO getFile(FileVO fileVO) throws Exception;
     public String generateFileUploader(MultipartFile uploadFile) throws Exception;
-    public void generateFileDownloader(HttpServletRequest request, HttpServletResponse response) throws Exception;
+    public void generateFileDownloader(HttpServletRequest request, HttpServletResponse response, String fileName) throws Exception;
 }

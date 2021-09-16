@@ -6,7 +6,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.annotation.Resource;
-import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.File;
@@ -28,9 +27,16 @@ public class FileServiceImpl implements FileService {
     }
 
     @Override
-    public List<FileVO> getFile(FileVO fileVO) throws Exception {
+    public List<FileVO> getFileList(FileVO fileVO) throws Exception {
+        return fileMapper.getFileList(fileVO);
+    }
+
+    @Override
+    public FileVO getFile(FileVO fileVO) throws Exception {
         return fileMapper.getFile(fileVO);
     }
+
+
 
     @Override
     public String generateFileUploader(MultipartFile uploadFile) throws Exception {
@@ -50,7 +56,7 @@ public class FileServiceImpl implements FileService {
     }
 
     @Override
-    public void generateFileDownloader(HttpServletRequest request, HttpServletResponse response) {
+    public void generateFileDownloader(HttpServletRequest request, HttpServletResponse response, String fileName) {
         /*response.reset();
         //response.setContentType("application/x-msdownload; charset=UTF-8");
         response.setHeader("Content-Type", "application/octet-stream; charset=UTF-8");

@@ -15,7 +15,6 @@ $(document).ready(() => {
         for (let i = 0; i < Object.keys(files).length; i++) {
             formData.append('files', files[i]);
         }
-        console.log(formData);
         $.ajax({
             type: 'post',
             enctype: 'multipart/form-data',
@@ -77,6 +76,7 @@ const validation = fileName => {
     //TODO 추가해야함
 }
 
+//TODO 업로드 목록 제거
 const rmPreview = target => {
 
 }
