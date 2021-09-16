@@ -16,7 +16,7 @@ $(document).ready(() => {
         </thead>
         <tbody>
         <c:if test="${boardVOList != null}">
-            <c:forEach var="boardVO" item="${boardVOList}">
+            <c:forEach var="boardVO" items="${boardVOList}">
                 <tr>
                     <td>${boardVO.boardTitle}</td>
                     <td>${boardVO.registDt}</td>

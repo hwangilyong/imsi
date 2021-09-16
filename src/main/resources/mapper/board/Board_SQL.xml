@@ -23,7 +23,7 @@
                     BOARD_CONTENT,
                     USER_SN,
                     REGIST_DT,
-                    UPDT_ID
+                    UPDT_ID,
                     UPDT_DT
         FROM        TB_BOARD
         WHERE       BOARD_SN = #{boardSn}
@@ -33,10 +33,10 @@
         SELECT      BOARD_SN,
                     BOARD_TITLE,
                     BOARD_CONTENT,
-                    USER_ID,
+                    USER_SN,
                     REGIST_DT,
-                    UPDT_ID
-                    UPDT_DT,
+                    UPDT_ID,
+                    UPDT_DT
         FROM        TB_BOARD
         ORDER BY    REGIST_DT DESC
     </select>
