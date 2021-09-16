@@ -9,16 +9,11 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpSession;
-import java.util.ArrayList;
-import java.util.List;
 
 @Controller
 @RequestMapping("/board")
@@ -33,7 +28,7 @@ public class BoardController {
 
     @GetMapping("/list")
     public String boardList(Model model) throws Exception {
-        //model.addAttribute("boardVOList", boardService.getBoardList(null));
+    model.addAttribute("boardVOList", boardService.getBoardList(new BoardVO()));
         return "/board/board_list.tile";
     }
 
@@ -42,34 +37,30 @@ public class BoardController {
         return "/board/board_add.tile";
     }
 
+    @ResponseBody
     @PostMapping("/add")
-    public String boardAdd(Model model, HttpSession session, BoardVO boardVO, MultipartFile[] uploadFile) throws Exception {
-        if (uploadFile.length > 0) {
-            for (MultipartFile file: uploadFile) {
-                logger.info("test : {}", file.getOriginalFilename());
-            }
-            return "redirect:/";
-        }
+    public boolean boardAdd(HttpSession session, BoardVO boardVO, MultipartFile[] files) throws Exception {
         UserVO userAuth = (UserVO)session.getAttribute("userAuth");
         if (userAuth == null) {
-            model.addAttribute("message", "not auth");
-            return "/user/login.tile";
+            return false;
         }
         boardVO.setUserSn(userAuth.getUserSn());
         long boardSn = boardService.addBoard(boardVO);
 
-        for (MultipartFile file : uploadFile) {
-            if (file != null) {
-                FileVO fileVO = new FileVO();
-                fileVO.setBoardSn(boardSn);
-                fileVO.setFileOrglNm(file.getOriginalFilename());
-                fileVO.setFileNm(fileService.generateFileUploader(file));
+        if (files != null) {
+            for (MultipartFile file : files) {
+                if (file != null) {
+                    FileVO fileVO = new FileVO();
+                    fileVO.setBoardSn(boardSn);
+                    fileVO.setFileOrglNm(file.getOriginalFilename());
+                    fileVO.setFileNm(fileService.generateFileUploader(file));
 
-                fileService.addFile(fileVO);
+                    fileService.addFile(fileVO);
+                }
             }
         }
 
-        return "redirect:/board/list";
+        return true;
     }
 
     @GetMapping("/de/{boardSn}")

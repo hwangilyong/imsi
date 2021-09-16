@@ -32,4 +32,20 @@
         </if>
         ORDER BY    REGIST_DT DESC;
     </select>
+
+    <select id="getBoardList" parameterType="kr.or.ibuk5do.imsi.board.vo.BoardVO" resultType="kr.or.ibuk5do.imsi.board.vo.BoardVO">
+        SELECT      BOARD_SN,
+        BOARD_TITLE,
+        BOARD_CONTENT,
+        USER_ID,
+        REGIST_DT,
+        UPDT_ID
+        UPDT_DT,
+        FROM        TB_BOARD
+        <if test="boardSn != null and boardSn != ''">
+            WHERE
+            AND         BOARD_SN = #{boardSn}
+        </if>
+        ORDER BY    REGIST_DT DESC;
+    </select>
 </mapper>

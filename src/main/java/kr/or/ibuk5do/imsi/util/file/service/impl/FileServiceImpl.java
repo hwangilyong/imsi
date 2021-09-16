@@ -10,6 +10,7 @@ import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.File;
+import java.io.FileOutputStream;
 import java.net.URLEncoder;
 import java.nio.file.Path;
 import java.util.List;
@@ -37,7 +38,10 @@ public class FileServiceImpl implements FileService {
 
         try {
             String saveFile = uploadPath + fileNm;
-            uploadFile.transferTo(new File(saveFile));
+            FileOutputStream writer = new FileOutputStream(saveFile);
+            writer.write(uploadFile.getBytes());
+            writer.flush();
+            writer.close();
         } catch (Exception e) {
             e.printStackTrace();
         }

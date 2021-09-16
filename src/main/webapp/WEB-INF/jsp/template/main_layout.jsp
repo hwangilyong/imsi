@@ -17,10 +17,12 @@
 </head>
 <body>
 <script>
-    let message = ${message};
-    if (message != null) {
+    <c:if test="${message != null}">
+    let message = '${message}';
+    if (message != null && message != '') {
         alert(message);
     }
+    </c:if>
 </script>
 <tiles:insertAttribute name="header"/> <!--  /WEB-INF/views/common/layout/header.jsp -->
 <tiles:insertAttribute name="body"/> <!-- body -->

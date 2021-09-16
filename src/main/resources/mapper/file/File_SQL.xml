@@ -5,17 +5,11 @@
         INSERT INTO TB_FILE (
             FILE_NM,
             FILE_ORGL_NM,
-            BOARD_SN,
-            USE_AT,
-            USER_SN,
-            REGIST_DT
+            BOARD_SN
         ) VALUES (
              #{fileNm},
              #{fileOrglNm},
-             #{boardSn},
-             'y',
-             #{userSn},
-             now()
+             #{boardSn}
         )
     </insert>
 
