@@ -5,6 +5,9 @@ $(document).ready(() => {
         location.href= '/board/add';
     })
 })
+const goDetail = boardSn => {
+    location.href="/board/de/" + boardSn
+}
 </script>
 <div class="content">
     <table>
@@ -17,7 +20,7 @@ $(document).ready(() => {
         <tbody>
         <c:if test="${boardVOList != null}">
             <c:forEach var="boardVO" items="${boardVOList}">
-                <tr>
+                <tr onclick="javascript:goDetail(${boardVO.boardSn})" style="cursor:pointer">
                     <td>${boardVO.boardTitle}</td>
                     <td>${boardVO.registDt}</td>
                 </tr>

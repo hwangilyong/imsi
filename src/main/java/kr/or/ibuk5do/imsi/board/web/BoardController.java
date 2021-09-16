@@ -70,18 +70,17 @@ public class BoardController {
         BoardVO boardVO = new BoardVO();
 
         fileVO.setBoardSn(boardSn);
-        List<FileVO> fileVOList = fileService.getFileList(fileVO);
-        boardVO = boardService.getBoard(boardVO);
+        boardVO.setBoardSn(boardSn);
 
-        model.addAttribute("boardVO", boardVO);
-        model.addAttribute("fileVOList", fileVOList);
+        model.addAttribute("boardVO", boardService.getBoard(boardVO));
+        model.addAttribute("fileVOList", fileService.getFileList(fileVO));
 
-        return "";
+        return "board/board_detail.tile";
     }
 
     @PostMapping("/de/file")
     public void fileDownload(@RequestParam long fileSn, HttpServletRequest request, HttpServletResponse response) throws Exception {
-        FileVO fileVO= new FileVO();
+        FileVO fileVO = new FileVO();
         fileVO.setFileSn(fileSn);
 
         fileVO = fileService.getFile(fileVO);

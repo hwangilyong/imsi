@@ -13,21 +13,23 @@
         )
     </insert>
 
-    <select id="getFileList" parameterType="kr.or.ibuk5do.imsi.util.file.vo.FileVO">
+    <select id="getFileList" parameterType="kr.or.ibuk5do.imsi.util.file.vo.FileVO" resultType="kr.or.ibuk5do.imsi.util.file.vo.FileVO">
         SELECT  FILE_SN,
                 FILE_NM,
                 FILE_ORGL_NM,
                 FILE_SIZE,
                 BOARD_SN
+        FROM    TB_FILE
         WHERE   BOARD_SN = #{boardSn}
     </select>
 
-    <select id="getFile" parameterType="kr.or.ibuk5do.imsi.util.file.vo.FileVO">
+    <select id="getFile" parameterType="kr.or.ibuk5do.imsi.util.file.vo.FileVO" resultType="kr.or.ibuk5do.imsi.util.file.vo.FileVO">
         SELECT  FILE_SN,
                 FILE_NM,
                 FILE_ORGL_NM,
                 FILE_SIZE,
                 BOARD_SN
+        FROM    TB_FILE
         WHERE   FILE_SN = #{fileSn}
     </select>
 </mapper>
